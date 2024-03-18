@@ -3,8 +3,20 @@ function [Cfinal, Ctotal, Theta] = OptimizeRIS(H,F,G,Theta,Rxx,sigma2,varargin)
 % Description: This function optimizes a diagonal RIS to maximizae capacity
 % in a MIMO link for a fixed transmit covariance.
 %
-% 
-%   Detailed explanation goes here (TBC)
+% It implements the algorithm in S. Zhang, R. Zhang, "Capacity
+% characterization for IRS aided MIMO Communications", JSAC, vol. 38, no.
+% 8, pp. 1823-1838, 2020.
+% At each iteration the algorithm updates Q for fixed Theta, and then updates Theta
+% (one element at a time) for fixed Q
+%
+% Input parameters:
+% H,F,G: (direct, RIS->Tx, Tx->RIS, resp.)
+% Theta : initial RIS
+% Rxx : Tx covariance matrix
+% sigma2 : noise variance
+% varargin: structure with the algoritm parameters
+%
+% I. Santamaria, UC, Nov. 2023
 
 [Nrx,M] = size(F);   % Matrix F is Nrx \times M
 %% Default values

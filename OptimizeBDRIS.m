@@ -5,8 +5,20 @@ function [Cfinal, Ctotal, Theta, Qt] = OptimizeBDRIS(H,F,G,Qt,Rxx,sigma2n,vararg
 % in a MIMO link for a fixed transmit covariance. The BDRIS matrix is
 % unitary+symmetric.
 %
+% It implements the algorithm in I. Santamaria et al, "MIMO capacity
+% maximization with beyond-diagonal RIS" SPAWC 2024.
+% The unitary +symmetric BD-RIS is factorized as Theta = Q.Q.', where Q is
+% unitary
+% 
 %
-%   Detailed explanation goes here (TBC)
+% Input parameters:
+% H,F,G: (direct, RIS->Tx, Tx->RIS, resp.)
+% Qt : initial unitary matrix RIS is Qt*Qt.'
+% Rxx : Tx covariance matrix
+% sigma2 : noise variance
+% varargin: structure with the algoritm parameters
+%
+% I. Santamaria, UC, Nov. 2023
 
 [Nrx,~] = size(F);   % Matrix F is Nrx \times M
 
